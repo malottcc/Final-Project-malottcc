@@ -12,18 +12,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 playerVelocity;
     private float gravityValue = -9.81f;
 
-    private Animator anim;
-
-    private float jumpHeight = 10.0f;
-    private bool groundedPlayer;
-
-    public GameObject inGameMenu;
-
-    // Start is called before the first frame update
+    // Start s called before the first frame update
     void Start()
     {
         controller = this.GetComponent<CharacterController>();
-        anim = this.gameObject.GetComponent<Animator>();
 
 
     }
@@ -37,31 +29,16 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetAxis("Vertical") > 0)
         {
             controller.Move(moveDir * Time.deltaTime * playerMoveSpeed);
-            anim.SetInteger("walk", 1);
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                anim.SetBool("run", true);
-                playerMoveSpeed = 10f;
-            }
+           
         }
 
         //backward
         else if (Input.GetAxis("Vertical") < 0)
         {
             controller.Move(-moveDir * Time.deltaTime * playerMoveSpeed);
-            anim.SetInteger("walk", 1);
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                anim.SetBool("run", true);
-                playerMoveSpeed = 10f;
-            }
+    
         }
-        else
-        {
-            anim.SetInteger("walk", 0);
-            anim.SetBool("run", false);
-            playerMoveSpeed = 5f;
-        }
+      
 
         //rotate left
         if (Input.GetAxis("Horizontal") > 0)
@@ -75,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
             transform.Rotate(-Vector3.up * Time.deltaTime * playerRotateSpeed);
         }
 
-        //jump
+        /*jump
         groundedPlayer = controller.isGrounded;
         if (Input.GetKeyDown(KeyCode.Space) && groundedPlayer)
         {
@@ -83,12 +60,12 @@ public class PlayerMovement : MonoBehaviour
             anim.SetTrigger("jump");
             anim.SetBool("falling", !groundedPlayer);
 
-        }
+        } */
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        /*if (Input.GetKeyDown(KeyCode.Escape))
         {
             inGameMenu.SetActive(true);
-        }
+        }*/
 
 
         //gravity affects
