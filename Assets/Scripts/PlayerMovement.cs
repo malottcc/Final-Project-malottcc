@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DialogueEditor;
+
 
 
 public class PlayerMovement : MonoBehaviour
@@ -17,11 +19,17 @@ public class PlayerMovement : MonoBehaviour
     private float jumpHeight = 10.0f;
     private bool groundedPlayer;
 
+    public GameObject InGameMenu;
+
+    public NPCConversation conv;
+
     // Start s called before the first frame update
     void Start()
     {
         controller = this.GetComponent<CharacterController>();
         anim = this.gameObject.GetComponent<Animator>();
+
+        ConversationManager.Instance.StartConversation(conv);
 
     }
 
@@ -82,12 +90,12 @@ public class PlayerMovement : MonoBehaviour
             anim.SetTrigger("Jump");
             
 
-        } 
+        }
 
-        /*if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            inGameMenu.SetActive(true);
-        }*/
+            InGameMenu.SetActive(true);
+        }
 
 
         //gravity affects
